@@ -92,8 +92,9 @@ class Farr extends Array {
     ['at', this.#at],
     ['nCycles', this.#nCycles]
   ])
+  #P = null
   // get the Proxy to be returned by nonterminal functions
-  #returnP = () => this.p
+  #returnP = () => this.#P
   // keys for parsing  terminal commands
   #terminals = new Map([
     ['all', this.all],
@@ -144,7 +145,7 @@ class Farr extends Array {
    */
   constructor (arr) {
     super()
-    this.p = new Proxy(this, {
+    this.#P = new Proxy(this, {
       set (target, prop, value) {
         if (Farr.isSafeIndex(prop)) {
           switch (kindOf(value)) {
@@ -171,7 +172,7 @@ class Farr extends Array {
       }
     })
     if (Array.isArray(arr)) {
-      this.p.push(...arr)
+      this.#P.push(...arr)
     }
     return this.#returnP()
   }
