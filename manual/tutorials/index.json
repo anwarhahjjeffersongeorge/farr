@@ -3,9 +3,9 @@
     "title": "Installation"
   },
   "constructor": {
-    "title": "Constructor"
+    "title": "new Farr()"
   },
   "all": {
-    "title": "All"
+    "title": ".all"
   }
 }
