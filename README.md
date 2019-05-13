@@ -5,7 +5,7 @@
 
 --------------
 
-# `farr` &mdash;
+# &mdash; `farr` &mdash;
 ### [Documentation](https://anwarhahjjeffersongeorge.github.io/farr/)
 
 ### arrays of functions only
