@@ -10,11 +10,11 @@
 
 This module exports a single class `Farr`, that extends the native Array class.
 
-Anytime an integer-valued property of a `Farr` is set, the provided value gets filtered:
+Anytime an [array-index](http://ecma-international.org/ecma-262/9.0/index.html#array-index)-valued property of a `Farr` is set, the provided value gets filtered:
 - If the value is a `function`, it's left as-is.
 - If the value is not a `function`, it's replaced by a new anonymous function that produces the value when called.
 
-Thus, Farr arrays only store `function` elements.
+This means that`Farr` arrays only store `function` elements or empty slots.
 
 ### Methods
 

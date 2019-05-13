@@ -3,6 +3,8 @@ import kindOf from 'kind-of'
 import dayjs from 'dayjs'
 import temporal from 'temporal'
 const {bigint} = process.hrtime
+const MAX_ARRAY_INDEX = 2**32 - 1
+const MIN_NEGA_INDEX = -(MAX_ARRAY_INDEX + 1)
 /**
  * @classdesc
  * @augments Array
@@ -73,6 +75,8 @@ class Farr extends Array {
       return JSON.stringify(o)
     }
   }
+  // constrain a given array index
+  #constrainIndex = i => (Math.sign(i) === -1) ? this.length + Number(i) : i
   /**
    * reset the current this.#commands
    *
@@ -171,7 +175,7 @@ class Farr extends Array {
   /**
    * constructor - create a Farr instance
    *
-   * @param  {Array} [arr] if an Array, its elements will be used to populate the new instance
+   * @param  {(Array|number)} [arr] if an Array, its elements will be used to populate the new instance. if a number, it sets the instance's length -- Array
    * @return {Array} this instance (Proxy)
    * @tutorial constructor
    */
@@ -180,10 +184,10 @@ class Farr extends Array {
     this.#P = new Proxy(this, {
       set (target, prop, value) {
         if (Farr.isSafeIndex(prop)) {
+          prop = target.#constrainIndex(prop)
           switch (kindOf(value)) {
             case 'function':
               return Reflect.set(target, prop, value)
-              break;
             default:
               return Reflect.set(target, prop, () => value)
           }
@@ -191,8 +195,8 @@ class Farr extends Array {
         return Reflect.set(...arguments)
       },
       get (target, prop, receiver) {
-        if (kindOf(prop) !== 'symbol' && Farr.isSafeIndex(prop)) {
-          prop = (Math.sign(prop) === -1) ? target.length + Number(prop) : prop
+        if (Farr.isSafeIndex(prop)) {
+          prop = target.#constrainIndex(prop)
         } else if (kindOf(prop) === 'string') {
           selective_processing: {
             if (target.#nonterminals.has(prop)) {
@@ -210,6 +214,8 @@ class Farr extends Array {
     })
     if (Array.isArray(arr)) {
       this.#P.push(...arr)
+    } else if (Number.isInteger(arr)) {
+      this.length = arr
     }
     return this.#returnP()
   }
@@ -345,7 +351,7 @@ Object.defineProperties(Farr, {
    */
   isSafeIndex: {
     value: (d) => {
-      return Number.isSafeInteger(+d)
+      return (typeof d !== 'symbol') && Number.isInteger(+d) && MIN_NEGA_INDEX <= d && d <= MAX_ARRAY_INDEX
     },
     enumerable: true,
     writable: false,
