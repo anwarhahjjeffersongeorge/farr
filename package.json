@@ -41,7 +41,7 @@
     "predoc": "rm -rf docs",
     "doc": "jsdoc ./src/main.js -d ./docs/ -c ./jsdoc.json -r ./README.md -u ./manual/tutorials --verbose -t ./node_modules/ink-docstrap/template"
   },
-  "version": "1.0.3",
+  "version": "1.0.4",
   "ava": {
     "files": [
       "test/**/*.test.js"
