@@ -4,7 +4,7 @@ import { Farr } from '..'
 import kindOf from 'kind-of'
 import {is} from './utils'
 const  { bigint } = process.hrtime
-const tolerance = .02
+const tolerance = .1
 const arr = []
 const delay = 100
 const units = 'ms'
