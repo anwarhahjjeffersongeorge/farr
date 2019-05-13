@@ -1,4 +1,4 @@
-Version](https://img.shields.io/github/package-json/v/anwarhahjjeffersongeorge/farr/master.svg) [![Build Status](https://travis-ci.com/anwarhahjjeffersongeorge/farr.svg?branch=master)](https://travis-ci.com/anwarhahjjeffersongeorge/farr) [![codecov](https://codecov.io/gh/anwarhahjjeffersongeorge/farr/branch/master/graph/badge.svg)](https://codecov.io/gh/anwarhahjjeffersongeorge/farr)[![Source Documentation](https://anwarhahjjeffersongeorge.github.io/farr/badge.svg)](https://anwarhahjjeffersongeorge.github.io/farr/source.html)
+[Version](https://img.shields.io/github/package-json/v/anwarhahjjeffersongeorge/farr/master.svg) [![Build Status](https://travis-ci.com/anwarhahjjeffersongeorge/farr.svg?branch=master)](https://travis-ci.com/anwarhahjjeffersongeorge/farr) [![codecov](https://codecov.io/gh/anwarhahjjeffersongeorge/farr/branch/master/graph/badge.svg)](https://codecov.io/gh/anwarhahjjeffersongeorge/farr)[![Source Documentation](https://anwarhahjjeffersongeorge.github.io/farr/badge.svg)](https://anwarhahjjeffersongeorge.github.io/farr/source.html)
 
 ------------
 
