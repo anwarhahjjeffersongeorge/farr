@@ -7,5 +7,20 @@
   },
   "all": {
     "title": ".all"
+  },
+  "cascade": {
+    "title": ".cascade"
+  },
+  "periodic": {
+    "title": ".periodic"
+  },
+  "nCycles": {
+    "title": ".nCycles"
+  },
+  "after": {
+    "title": ".after"
+  },
+  "at": {
+    "title": ".at"
   }
 }

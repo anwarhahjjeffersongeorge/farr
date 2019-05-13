@@ -3,7 +3,7 @@
     "hardwrap": true
   },
   "plugins": ["plugins/markdown"],
-  "sourceType": "mod[qwww3aule",
+  "sourceType": "module",
   "templates": {
     "copyright": "ⓤ Uncopyright 2019 by Anwar Hahj Jefferson-George",
     "includeDate": true,
