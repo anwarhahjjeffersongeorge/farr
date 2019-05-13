@@ -13,10 +13,13 @@ class Farr extends Array {
    * after - schedule the next terminal command to occur after __t__ milliseconds
    * - chainable
    * @method
+   * @memberof Farr#
+   * @name after
    * @param {(String|Number)} [t] the millisecond delay after which the next terminal command should occur...if a non-Number object is provided, it will be cast to Number
    * @return {Farr} this instance (Proxy)
+   * @tutorial after
    */
-   #after = (t) => {
+  #after = (t) => {
     if (['string'].includes(kindOf(t))) {
       t = Number(t)
     }
@@ -33,10 +36,13 @@ class Farr extends Array {
    * at - schedule the next terminal command to occur at date/time __t__
    * - chainable
    * @method
+   * @memberof Farr#
+   * @name at
    * @param {(String|Number|date|dayjs)} [t] the date/time at which the next terminal command should occur...if a non-dayjs object is provided, it will be cast to dayjs
    * @return {Farr} this instance (Proxy)
+   * @tutorial at
    */
-   #at = (t) => {
+  #at = (t) => {
     if (['string', 'number', 'date'].includes(kindOf(t))) {
       t = dayjs(t)
     }
@@ -51,8 +57,14 @@ class Farr extends Array {
   }
   // the current commands for the next terminal function call
   #commands = Object.assign({}, Farr.baseCommands)
-  // get this.#commands as a JSON object
-  commandJson = () => {
+  /**
+   * get this.#commands as a JSON object]
+   *
+   * @method
+   * @memberof Farr#
+   * @name commandJson
+   */
+  #commandJson = () => {
     const o = Object.assign({}, this.#commands)
     for (let k in o) {
       if (o.hasOwnProperty(k)) {
@@ -61,25 +73,44 @@ class Farr extends Array {
       return JSON.stringify(o)
     }
   }
-  // reset the current this.#commands
+  /**
+   * reset the current this.#commands
+   *
+   * @method
+   * @memberof Farr#
+   * @name clearCommands
+   */
   #clearCommands = () => {
     Object.assign(this.#commands, Farr.baseCommands)
   }
   /**
-   * halt - halt current activities, including
+   * halt current activities, including
    * 1. temporal tasks, and
    * 2. any timers
+   *
+   * @method
+   * @memberof Farr#
+   * @name halt
    */
-  halt = () => {
+  #halt = () => {
     temporal.stop()
     this.#timerPool.forEach(timer => clearTimeout(timer))
   }
+  // controls to be exposed
+  #controls = new Map([
+    ['clearCommands', this.#clearCommands.bind(this)],
+    ['commandJson', this.#commandJson.bind(this)],
+    ['halt', this.#halt.bind(this)]
+  ])
   /**
    * nCycles - schedule the next terminal command to occur __n__ times
    * - chainable
    * @method
+   * @memberof Farr#
+   * @name nCycles
    * @param {Number} [n=1] the number of times the next terminal command should occur...
    * @return {Farr} this instance (Proxy)
+   * @tutorial nCycles
    */
   #nCycles = (n) => {
     n = (kindOf(n) === 'number') ? n : 1
@@ -92,10 +123,11 @@ class Farr extends Array {
     ['at', this.#at],
     ['nCycles', this.#nCycles]
   ])
+  // a Proxy to this
   #P = null
   // get the Proxy to be returned by nonterminal functions
   #returnP = () => this.#P
-  // keys for parsing  terminal commands
+  // keys for parsing terminal commands
   #terminals = new Map([
     ['all', this.all],
     ['cascade', this.cascade],
@@ -188,8 +220,7 @@ class Farr extends Array {
    * - resolves when all the functions called return, and
    * - accepts a parameter __arg__ that contains
    *     1. a starting value __arg.s__ to be passed to all functions
-   *
-   * [Promise.all]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all}
+
    * -
    * @async
    * @param  {object} [arg = {s: undefined}] argument
@@ -211,6 +242,7 @@ class Farr extends Array {
    * @async
    * @param  {object} [arg = {s: undefined}] argument
    * @return {Promise} result of Promise.all call on this' function elements
+   * @tutorial cascade
    */
   async cascade (arg = {s: undefined}) {
     let {s} = arg
@@ -239,6 +271,7 @@ class Farr extends Array {
    * @async
    * @param  {object} [arg = {delay: 233, s: undefined}] argument
    * @return {Promise} eventual result of call on this' function elements
+   * @tutorial periodic
    */
   async periodic (arg = {delay: 233, s: undefined}) {
     const {s, delay} = arg
@@ -286,6 +319,12 @@ class Farr extends Array {
 }
 
 Object.defineProperties(Farr, {
+  /**
+   * the default commands
+   * @memberof Farr
+   * @name baseCommands
+   * @static
+   */
   baseCommands: {
     value: Object.freeze({
       t0: 0,
