@@ -1,6 +1,11 @@
-/.travis.yml
-/.github/
-/node_modules/*
-/.nyc_output/*
-/coverage/*
-/docs/*
+.travis.yml
+jsdoc.json
+.DS_Store
+.yo-rc.json
+manual/*
+test/*
+.github/
+node_modules/*
+.nyc_output/*
+coverage/*
+docs/*
