@@ -4,7 +4,7 @@ import { Farr } from '..'
 import kindOf from 'kind-of'
 import {is} from './utils'
 const  { bigint } = process.hrtime
-const tolerance = .1
+const tolerance = .15
 const arr = []
 const delay = 100
 const units = 'ms'
@@ -30,7 +30,7 @@ test(`calls ${n} functions at ${delay}${units} intervals +/-${tolerance * 100}%`
   // t.log(arr)
   for (let i = 1; i < arr.length; i++) {
     const dt = Math.round(Number(arr[i] - arr[i - 1]) / 1e6)
-    t.log(dt, delay)
-    t.is(Math.abs((dt-delay)/delay) < tolerance, true, 'timestamp delta roughly equals interval')
+    // t.log(dt, delay)
+    t.is(Math.abs((dt-delay)/delay) < tolerance, true, `real interval ${dt} roughly equals timestamp delta ${delay}`)
   }
 })

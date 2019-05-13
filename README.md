@@ -1,12 +1,15 @@
-[Version](https://img.shields.io/github/package-json/v/anwarhahjjeffersongeorge/farr/master.svg) [![Build Status](https://travis-ci.com/anwarhahjjeffersongeorge/farr.svg?branch=master)](https://travis-ci.com/anwarhahjjeffersongeorge/farr) [![codecov](https://codecov.io/gh/anwarhahjjeffersongeorge/farr/branch/master/graph/badge.svg)](https://codecov.io/gh/anwarhahjjeffersongeorge/farr)[![Source Documentation](https://anwarhahjjeffersongeorge.github.io/farr/badge.svg)](https://anwarhahjjeffersongeorge.github.io/farr/source.html)
-
+[![Version](https://img.shields.io/github/package-json/v/anwarhahjjeffersongeorge/farr/master.svg)](https://github.com/anwarhahjjeffersongeorge/farr)[![Build Status](https://travis-ci.com/anwarhahjjeffersongeorge/farr.svg?branch=master)](https://travis-ci.com/anwarhahjjeffersongeorge/farr) [![codecov](https://codecov.io/gh/anwarhahjjeffersongeorge/farr/branch/master/graph/badge.svg)](https://codecov.io/gh/anwarhahjjeffersongeorge/farr)
 ------------
 
 [![license](https://img.shields.io/github/license/anwarhahjjeffersongeorge/farr.svg)](UNLICENSE) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-blue.svg)](https://standardjs.com)
 
 --------------
 
-# `farr` &mdash; arrays of functions only
+# `farr` &mdash;
+### documentation
+[Source Documentation](https://anwarhahjjeffersongeorge.github.io/farr/)
+
+### arrays of functions only
 
 This module exports a single class `Farr`, that extends the native Array class.
 
