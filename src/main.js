@@ -104,11 +104,11 @@ class Farr extends Array {
   // the timers created by this instance
   #timerPool = new Set()
   // get a task-wrapped function corresponding to those in this.#terminals
-  #wrappedTerminal = (prop) => {
+  #wrappedTerminal = (terminal) => {
     const {t0, nCycles} = this.#commands
     const clearCommands = this.#clearCommands
     const dt = (typeof t0 === 'function') ? t0() : null
-    const f = this.#terminals.get(prop).bind(this)
+    const f = terminal.bind(this)
     return async (arg) => {
       clearCommands()
       const cycle = async () => {
@@ -161,11 +161,16 @@ class Farr extends Array {
       get (target, prop, receiver) {
         if (kindOf(prop) !== 'symbol' && Farr.isSafeIndex(prop)) {
           prop = (Math.sign(prop) === -1) ? target.length + Number(prop) : prop
-        } else if (kindOf(prop) === 'string' ) {
-          if (target.#nonterminals.has(prop)) {
-            return (...args) => target.#nonterminals.get(prop)(...args)
-          } else if (target.#terminals.has(prop)) {
-            return target.#wrappedTerminal(prop)
+        } else if (kindOf(prop) === 'string') {
+          selective_processing: {
+            if (target.#nonterminals.has(prop)) {
+              return (...args) => target.#nonterminals.get(prop)(...args)
+            } else if (target.#terminals.has(prop)) {
+              const terminal = target.#terminals.get(prop)
+              return target.#wrappedTerminal(terminal)
+            } else if (target.#controls.has(prop)) {
+              return target.#controls.get(prop)
+            }
           }
         }
         return Reflect.get(target, prop, receiver)
@@ -222,16 +227,6 @@ class Farr extends Array {
    */
   get head () {
     return this[0]
-  }
-
-  /**
-   * @static isSafeIndex - determine whether a number __d__ can be used as an array index
-   *
-   * @param  {Number} d the number to test
-   * @return {Boolean}   true if d is a usable array index
-   */
-  static isSafeIndex (d) {
-    return Number.isSafeInteger(+d)
   }
 
   /**
@@ -296,6 +291,23 @@ Object.defineProperties(Farr, {
       t0: 0,
       nCycles: 1
     }),
+    enumerable: true,
+    writable: false,
+    configurable: false
+  },
+  /**
+   * determine whether a number __d__ can be used as an array index
+   * @method
+   * @name isSafeIndex
+   * @param  {Number} d the number to test
+   * @return {Boolean}   true if d is a usable array index
+   * @memberof Farr
+   * @static
+   */
+  isSafeIndex: {
+    value: (d) => {
+      return Number.isSafeInteger(+d)
+    },
     enumerable: true,
     writable: false,
     configurable: false
