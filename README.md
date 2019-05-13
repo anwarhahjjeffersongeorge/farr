@@ -6,8 +6,7 @@
 --------------
 
 # `farr` &mdash;
-### documentation
-[Source Documentation](https://anwarhahjjeffersongeorge.github.io/farr/)
+### [Documentation](https://anwarhahjjeffersongeorge.github.io/farr/)
 
 ### arrays of functions only
 
@@ -26,16 +25,16 @@ This means that`Farr` arrays only store `function` elements or empty slots.
 #### Terminal Methods
 These are unary, asynchronous and non-chainable:
 
-- {@tutorial all}
-- {@tutorial cascade}
-- {@tutorial periodic}
+- .all
+- .cascade
+- .periodic
 
 #### Nonterminal Methods
 These are variadic, synchronous and chainable:
 
-- {@tutorial at}
-- {@tutorial after}
-- {@tutorial nCycles}
+- .at
+- .after
+- .nCycles
 
 ------
 ## Installation
