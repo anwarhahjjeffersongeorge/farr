@@ -11,7 +11,7 @@ Call all of the functions in the array, passing the result of each call to the n
 
       const f =  new Farr(fs)
 
-      const result= await f.all() // '0123456789'
+      const result= await f.cascade() // '0123456789'
     })()
 
 
@@ -26,5 +26,5 @@ Perform the above, but do so with a start value
 
       const f =  new Farr(fs)
 
-      const result= await f.all('o') // 'o0123456789'
+      const result= await f.cascade('o') // 'o0123456789'
     })()
