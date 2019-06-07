@@ -141,7 +141,7 @@ class Farr extends Array {
   #timerPool = new Set()
   // get a task-wrapped function corresponding to those in this.#terminals
   #wrappedTerminal = (terminal) => {
-    const {t0, nCycles} = this.#commands
+    const { t0, nCycles } = this.#commands
     const clearCommands = this.#clearCommands
     const dt = (typeof t0 === 'function') ? t0() : null
     const f = terminal.bind(this)
@@ -150,11 +150,11 @@ class Farr extends Array {
       const cycle = async () => {
         // const C = new Array(nCycles).fill(f.bind(this))
         let s = arg
-        for (let i = 0; i < nCycles; i++){
-          if (i===0) {
+        for (let i = 0; i < nCycles; i++) {
+          if (i === 0) {
             s = (s) ? await f(s) : await f()
           } else {
-            s = await f({s})
+            s = await f({ s })
           }
         }
         return s
@@ -294,7 +294,8 @@ class Farr extends Array {
       }
     }
     // console.log(tasks)
-    const queue = await this.temporal.queue(tasks)
+    // const queue = await this.temporal.queue(tasks)
+    await this.temporal.queue(tasks)
     // console.log(queue)
     return new Promise((resolve, reject) => {
       setTimeout(() => resolve(Promise.all(results)), delay * length)

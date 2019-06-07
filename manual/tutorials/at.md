@@ -10,8 +10,8 @@ Perform the next terminal call at a specified date/time:
 
       const f =  new Farr(fs)
 
-      f.after(datetime)
-      const result = await f.at() // -16... about a day later
+      f.at(datetime)
+      const result = await f.cascade() // -16... about a day later
 
     })()
 
@@ -26,7 +26,7 @@ Perform the above with chaining:
 
       const f =  new Farr(fs)
 
-      const result = await f.after(datetime).at() // -16 ... about a day later
+      const result = await f.at(datetime).cascade() // -16 ... about a day later
     })()
 
 
