@@ -2,8 +2,8 @@
 import kindOf from 'kind-of'
 import dayjs from 'dayjs'
 import temporal from 'temporal'
-const {bigint} = process.hrtime
-const MAX_ARRAY_INDEX = 2**32 - 1
+const { bigint } = process.hrtime
+const MAX_ARRAY_INDEX = 2 ** 32 - 1
 const MIN_NEGA_INDEX = -(MAX_ARRAY_INDEX + 1)
 /**
  * @classdesc
@@ -198,15 +198,13 @@ class Farr extends Array {
         if (Farr.isSafeIndex(prop)) {
           prop = target.#constrainIndex(prop)
         } else if (kindOf(prop) === 'string') {
-          selective_processing: {
-            if (target.#nonterminals.has(prop)) {
-              return (...args) => target.#nonterminals.get(prop)(...args)
-            } else if (target.#terminals.has(prop)) {
-              const terminal = target.#terminals.get(prop)
-              return target.#wrappedTerminal(terminal)
-            } else if (target.#controls.has(prop)) {
-              return target.#controls.get(prop)
-            }
+          if (target.#nonterminals.has(prop)) {
+            return (...args) => target.#nonterminals.get(prop)(...args)
+          } else if (target.#terminals.has(prop)) {
+            const terminal = target.#terminals.get(prop)
+            return target.#wrappedTerminal(terminal)
+          } else if (target.#controls.has(prop)) {
+            return target.#controls.get(prop)
           }
         }
         return Reflect.get(target, prop, receiver)
@@ -233,8 +231,8 @@ class Farr extends Array {
    * @return {Promise} result of Promise.all call on this' function elements
    * @tutorial all
    */
-  async all (arg = {s: undefined}) {
-    let {s} = arg
+  async all (arg = { s: undefined }) {
+    let { s } = arg
     const getS = (i) => (Array.isArray(s) && s.length >= this.length) ? s[i] : s
     return Promise.all(this.map((f, i) => f(getS(i))))
   }
@@ -250,8 +248,8 @@ class Farr extends Array {
    * @return {Promise} result of Promise.all call on this' function elements
    * @tutorial cascade
    */
-  async cascade (arg = {s: undefined}) {
-    let {s} = arg
+  async cascade (arg = { s: undefined }) {
+    let { s } = arg
     for await (let f of this) {
       s = await f(s)
     }
@@ -279,9 +277,9 @@ class Farr extends Array {
    * @return {Promise} eventual result of call on this' function elements
    * @tutorial periodic
    */
-  async periodic (arg = {delay: 233, s: undefined}) {
-    const {s, delay} = arg
-    const {length} = this
+  async periodic (arg = { delay: 233, s: undefined }) {
+    const { s, delay } = arg
+    const { length } = this
     const results = new Array(length)
     const tasks = new Array(length)
 
@@ -298,8 +296,8 @@ class Farr extends Array {
     // console.log(tasks)
     const queue = await this.temporal.queue(tasks)
     // console.log(queue)
-    return new Promise((resolve, reject)=>{
-      setTimeout( () => resolve(Promise.all(results)), delay * length)
+    return new Promise((resolve, reject) => {
+      setTimeout(() => resolve(Promise.all(results)), delay * length)
     })
   }
 
@@ -312,7 +310,6 @@ class Farr extends Array {
     return this[-1]
   }
 
-
   /**
    * get temporal - get the temporal instance used by this instance
    *
@@ -321,7 +318,6 @@ class Farr extends Array {
   get temporal () {
     return temporal
   }
-
 }
 
 Object.defineProperties(Farr, {
@@ -359,4 +355,4 @@ Object.defineProperties(Farr, {
   }
 })
 
-export {Farr}
+export { Farr }
