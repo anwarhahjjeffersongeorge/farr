@@ -2,7 +2,6 @@
 import kindOf from 'kind-of'
 import dayjs from 'dayjs'
 import temporal from 'temporal'
-const { bigint } = process.hrtime
 const MAX_ARRAY_INDEX = 2 ** 32 - 1
 const MIN_NEGA_INDEX = -(MAX_ARRAY_INDEX + 1)
 /**
@@ -34,6 +33,20 @@ class Farr extends Array {
 
     return this.#returnP()
   }
+
+  /**
+   * a function that produces a function returning the argument provided to the first function. Override it in a subclass to change the function-making behavior of instances.
+   *
+   * By default, it returns
+   * - Function-type arguments unchanged, and
+   * - Non-function-type arguments wrapped in functions.
+   * @method
+   * @memberof Farr#
+   * @name funcWrapper
+   * @param {(object)} [v] anything
+   * @return {function}
+   */
+  #funcWrapper = v => typeof v === 'function' ? v : () => v
   /**
    * at - schedule the next terminal command to occur at date/time __t__
    * - chainable
@@ -185,12 +198,7 @@ class Farr extends Array {
       set (target, prop, value) {
         if (Farr.isSafeIndex(prop)) {
           prop = target.#constrainIndex(prop)
-          switch (kindOf(value)) {
-            case 'function':
-              return Reflect.set(target, prop, value)
-            default:
-              return Reflect.set(target, prop, () => value)
-          }
+          return Reflect.set(target, prop, target.#funcWrapper(value))
         }
         return Reflect.set(...arguments)
       },
