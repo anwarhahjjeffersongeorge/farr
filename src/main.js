@@ -46,7 +46,7 @@ class Farr extends Array {
    * @param {(object)} [v] anything
    * @return {function}
    */
-  #funcWrapper = v => typeof v === 'function' ? v : () => v
+  funcWrapper = v => typeof v === 'function' ? v : () => v
   /**
    * at - schedule the next terminal command to occur at date/time __t__
    * - chainable
@@ -198,7 +198,7 @@ class Farr extends Array {
       set (target, prop, value) {
         if (Farr.isSafeIndex(prop)) {
           prop = target.#constrainIndex(prop)
-          return Reflect.set(target, prop, target.#funcWrapper(value))
+          return Reflect.set(target, prop, target.funcWrapper(value))
         }
         return Reflect.set(...arguments)
       },
