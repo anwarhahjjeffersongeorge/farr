@@ -370,7 +370,7 @@ Object.defineProperties(Farr, {
    * @static
    */
   nonTerminalKeys: {
-    value: Object.freeze([ 'after', 'at', 'nCycles' ]),
+    value: [ 'after', 'at', 'nCycles' ],
     enumerable: true,
     writable: false,
     configurable: false
