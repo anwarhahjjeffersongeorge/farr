@@ -361,6 +361,19 @@ Object.defineProperties(Farr, {
     enumerable: true,
     writable: false,
     configurable: false
+  },
+  /**
+   * array containing the string keys of the non terminal functions
+   *
+   * @name nonTerminalKeys
+   * @memberof Farr
+   * @static
+   */
+  nonTerminalKeys: {
+    value: Object.freeze([ 'after', 'at', 'nCycles' ]),
+    enumerable: true,
+    writable: false,
+    configurable: false
   }
 })
 
