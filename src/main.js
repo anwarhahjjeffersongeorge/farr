@@ -31,10 +31,27 @@ class Farr extends Array {
       }
     }
 
-    return this.#returnP()
+    return this.#P
   }
-
-  #funcWrapper = v => typeof v === 'function' ? v : () => v
+  #premapper = null
+  #funcWrapper = u => {
+    const v = this.#premapper ? this.#premapper(u) : u
+    return typeof v === 'function' ? v : () => v
+  }
+  /**
+   * premap - set a function that maps any value given to it
+   * - chainable
+   * @method
+   * @memberof Farr#
+   * @name premap
+   * @param {(function)} [f] the mapping function. called with the value, should return something
+   * @return {Farr} this instance (Proxy)
+   * @tutorial premap
+   */
+  #premap = (f) => {
+    this.#premapper = (typeof f === 'function') ? f : null
+    return this.#P
+  }
   /**
    * at - schedule the next terminal command to occur at date/time __t__
    * - chainable
@@ -56,7 +73,7 @@ class Farr extends Array {
       }
     }
     // console.log(this.#commands);
-    return this.#returnP()
+    return this.#P
   }
   // the current commands for the next terminal function call
   #commands = Object.assign({}, Farr.baseCommands)
@@ -120,18 +137,17 @@ class Farr extends Array {
   #nCycles = (n) => {
     n = (kindOf(n) === 'number') ? n : 1
     this.#commands.nCycles = n
-    return this.#returnP()
+    return this.#P
   }
   // keys for parsing non terminal (chainable) commands
   #nonterminals = new Map([
     ['after', this.#after],
     ['at', this.#at],
-    ['nCycles', this.#nCycles]
+    ['nCycles', this.#nCycles],
+    ['premap', this.#premap]
   ])
   // a Proxy to this
   #P = null
-  // get the Proxy to be returned by nonterminal functions
-  #returnP = () => this.#P
   // keys for parsing terminal commands
   #terminals = new Map([
     ['all', this.all],
@@ -180,7 +196,7 @@ class Farr extends Array {
    * @return {Array} this instance (Proxy)
    * @tutorial constructor
    */
-  constructor (arr) {///
+  constructor (arr) {
     super()
     this.#P = new Proxy(this, {
       set (target, prop, value) {
@@ -211,7 +227,7 @@ class Farr extends Array {
     } else if (Number.isInteger(arr)) {
       this.length = arr
     }
-    return this.#returnP()
+    return this.#P
   }
 
   /**
