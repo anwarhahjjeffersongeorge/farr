@@ -61,7 +61,7 @@ This module is a parent class for another module [farr-this](https://anwarhahjje
 Please see [Docs](https://anwarhahjjeffersongeorge.github.io/farr/).
 
 ## Contributing Guidelines
-1.  All tests must pass.
+1.  All tests must pass (see Dependents) and all new functionality must include tests.
 3. Code must adhere to [JavaScript Standard Style](https://standardjs.com).
 4. New code must include [JSDoc documentation](https://jsdoc.app/).
 5. Build must pass [TravisCI](https://travis-ci.com/anwarhahjjeffersongeorge/farr).
