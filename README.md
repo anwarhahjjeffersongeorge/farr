@@ -53,10 +53,12 @@ or
 ## Testing
 Run `npm test`
 
+### Dependents
+This module is a parent class for another module [farr-this](https://anwarhahjjeffersongeorge.github.io/farr-this/). The farr-this module will auto-run the tests from this module, so changes made here should also work there.
 
 ## Documentation
 
-Please see [Docs](https://anwarhahjjeffersongeorge.github.io/linkedfunclist/).
+Please see [Docs](https://anwarhahjjeffersongeorge.github.io/farr/).
 
 ## Contributing Guidelines
 1.  All tests must pass.
