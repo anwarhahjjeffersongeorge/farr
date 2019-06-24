@@ -29,7 +29,8 @@ test('constructor accepts arrays, converting elements to functions', t => {
   }
 })
 
-test('constructor accepts arrays, leaving function elements as is', t => {  const types = [
+test('constructor accepts arrays, leaving function elements as is', t => {
+  const types = [
     '',
     33,
     {},
@@ -45,7 +46,7 @@ test('constructor accepts arrays, leaving function elements as is', t => {  cons
     switch (kindOf(types[i])) {
       case 'function':
         t.is(f[i], types[i], 'function should equal source function')
-        break;
+        break
       default:
         t.is(f[i](), types[i], 'function should have returned original value')
     }
