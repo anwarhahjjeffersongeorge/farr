@@ -374,7 +374,7 @@ Object.defineProperties(Farr, {
    * @static
    */
   nonTerminalKeys: {
-    value: [ 'after', 'at', 'nCycles', 'premap'],
+    value: ['after', 'at', 'nCycles', 'premap'],
     enumerable: true,
     writable: false,
     configurable: false
