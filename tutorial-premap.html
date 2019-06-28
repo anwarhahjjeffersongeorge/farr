@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Tutorial: Installation</title>
+	<title>Documentation Tutorial: premap</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -75,12 +75,15 @@
 <header>
     
 
-    <h2>Installation</h2>
+    <h2>premap</h2>
 </header>
 
 <article>
-    <h2>Installation</h2>
-<pre><code>npm install farr
+    <h3>Premapping elements before insertion</h3>
+<pre><code>const nums = [1, 4, 8, 64, 256, 1024, 24, 16384]
+const f = new Farr().premap(y =&gt; y * y)
+f.push(...nums)
+f[1]() // 16
 </code></pre>
 </article>
 
