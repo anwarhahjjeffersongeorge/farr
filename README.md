@@ -6,7 +6,9 @@
 --------------
 
 # &mdash; `farr` &mdash;
-### [Documentation](https://anwarhahjjeffersongeorge.github.io/farr/)
+### Documentation
+
+Please see [Docs](https://anwarhahjjeffersongeorge.github.io/farr/).
 
 ### arrays of functions only
 
@@ -35,6 +37,7 @@ These are variadic, synchronous and chainable:
 - .at
 - .after
 - .nCycles
+- .premap
 
 ------
 ## Installation
@@ -42,12 +45,7 @@ These are variadic, synchronous and chainable:
 Run `npm install farr`
 
 ## Usage
-
-    import {Farr} from 'farr'
-
-or
-
-    const Farr = require('farr')
+Please see Tutorials link at the top of this page.
 
 
 ## Testing
@@ -55,10 +53,6 @@ Run `npm test`
 
 ### Dependents
 This module is a parent class for another module [farr-this](https://anwarhahjjeffersongeorge.github.io/farr-this/). The farr-this module will auto-run the tests from this module, so changes made here should also work there.
-
-## Documentation
-
-Please see [Docs](https://anwarhahjjeffersongeorge.github.io/farr/).
 
 ## Contributing Guidelines
 1.  All tests must pass (see Dependents) and all new functionality must include tests.
