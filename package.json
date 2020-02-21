@@ -44,7 +44,7 @@
     "/src/*",
     "UNLICENSE"
   ],
-  "version": "1.2.1",
+  "version": "1.2.2",
   "ava": {
     "files": [
       "test/**/*.test.js"
